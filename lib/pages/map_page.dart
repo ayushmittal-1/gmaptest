@@ -49,7 +49,7 @@ class _MapPageState extends State<MapPage> {
                   _mapController.complete(controller)),
               initialCameraPosition: CameraPosition(
                 target: _pGooglePlex,
-                zoom: 13,
+                zoom: 20,
               ),
               markers: {
                 Marker(
