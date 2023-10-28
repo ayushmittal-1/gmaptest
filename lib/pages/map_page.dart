@@ -19,8 +19,8 @@ class _MapPageState extends State<MapPage> {
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
-  static const LatLng _pGooglePlex = LatLng(37.4223, -122.0848);
-  static const LatLng _pApplePark = LatLng(37.3346, -122.0090);
+  static const LatLng _pGooglePlex = LatLng(28.0229, 73.3119);
+  static const LatLng _pApplePark = LatLng(28.0229, 74.3119);
   LatLng? _currentP = null;
 
   Map<PolylineId, Polyline> polylines = {};
@@ -49,7 +49,7 @@ class _MapPageState extends State<MapPage> {
                   _mapController.complete(controller)),
               initialCameraPosition: CameraPosition(
                 target: _pGooglePlex,
-                zoom: 20,
+                zoom: 50,
               ),
               markers: {
                 Marker(
@@ -75,7 +75,7 @@ class _MapPageState extends State<MapPage> {
     final GoogleMapController controller = await _mapController.future;
     CameraPosition _newCameraPosition = CameraPosition(
       target: pos,
-      zoom: 13,
+      zoom: 10,
     );
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(_newCameraPosition),
@@ -137,9 +137,9 @@ class _MapPageState extends State<MapPage> {
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
         polylineId: id,
-        color: Colors.black,
+        color: Colors.purpleAccent,
         points: polylineCoordinates,
-        width: 8);
+        width: 3);
     setState(() {
       polylines[id] = polyline;
     });
