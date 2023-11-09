@@ -19,8 +19,9 @@ class _MapPageState extends State<MapPage> {
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
 
-  static const LatLng _pGooglePlex = LatLng(28.0229, 73.3119);
-  static const LatLng _pApplePark = LatLng(28.0229, 74.3119);
+  static const LatLng _pGooglePlex = LatLng(26.8416, 75.8014);
+  static const LatLng _pApplePark = LatLng(26.8598, 75.7644);
+  static const LatLng _charger3 = LatLng(26.9048 , 75.7489);
   LatLng? _currentP = null;
 
   Map<PolylineId, Polyline> polylines = {};
@@ -59,12 +60,16 @@ class _MapPageState extends State<MapPage> {
                 ),
                 Marker(
                     markerId: MarkerId("_sourceLocation"),
-                    icon: BitmapDescriptor.defaultMarker,
+                    icon: BitmapDescriptor.defaultMarkerWithHue(35),
                     position: _pGooglePlex),
                 Marker(
                     markerId: MarkerId("_destionationLocation"),
-                    icon: BitmapDescriptor.defaultMarker,
-                    position: _pApplePark)
+                    icon: BitmapDescriptor.defaultMarkerWithHue(35),
+                    position: _pApplePark),
+                Marker(
+                    markerId: MarkerId("_charger3"),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(35),
+                    position: _charger3)
               },
               polylines: Set<Polyline>.of(polylines.values),
             ),
@@ -75,7 +80,7 @@ class _MapPageState extends State<MapPage> {
     final GoogleMapController controller = await _mapController.future;
     CameraPosition _newCameraPosition = CameraPosition(
       target: pos,
-      zoom: 10,
+      zoom: 12,
     );
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(_newCameraPosition),
@@ -121,6 +126,7 @@ class _MapPageState extends State<MapPage> {
       GOOGLE_MAPS_API_KEY,
       PointLatLng(_pGooglePlex.latitude, _pGooglePlex.longitude),
       PointLatLng(_pApplePark.latitude, _pApplePark.longitude),
+
       travelMode: TravelMode.driving,
     );
     if (result.points.isNotEmpty) {
